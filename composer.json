@@ -1,0 +1,12 @@
+{
+	"name": "rrze/cmsinfo",
+	"description": "WordPress-Plugin zur Darstellung von Informationen zu installierten Themes und Plugins auf öffentlichen Seiten.",
+	"type": "WordPress Plugin",
+	"license": "GNU General Public License v2",
+	"require": {},
+	"autoload": {
+		"psr-4": {
+			"RRZE\\CMSinfo\\": "includes/"
+		}
+	}
+}
