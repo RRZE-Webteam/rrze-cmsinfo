@@ -30,12 +30,15 @@ defined('ABSPATH') || exit;
 require_once __DIR__ . '/vendor/autoload.php';
 
 use RRZE\CMSinfo\Main;
+use RRZE\CMSinfo\Shortcode;
 
 const RRZE_PHP_VERSION = '7.3';
 const RRZE_WP_VERSION = '5.2';
 
 // Registriert die Plugin-Funktion, die bei Aktivierung des Plugins ausgeführt werden soll.
 register_activation_hook(__FILE__, __NAMESPACE__ . '\activation');
+// Registriert die Plugin-Funktion, die ausgeführt werden soll, wenn das Plugin deaktiviert wird.
+register_deactivation_hook(__FILE__, __NAMESPACE__ . '\deactivation');
 // Wird aufgerufen, sobald alle aktivierten Plugins geladen wurden.
 add_action('plugins_loaded', __NAMESPACE__ . '\loaded');
 
@@ -78,9 +81,17 @@ function activation()
         wp_die($error);
     }
 
-    // Ab hier können die Funktionen hinzugefügt werden,
-    // die bei der Aktivierung des Plugins aufgerufen werden müssen.
-    // Bspw. wp_schedule_event, flush_rewrite_rules, etc.
+    // Holt die URLs für die Icons und Banner der aktiven Plugins und speichert sie in einem Transient.
+    $shortcode = new Shortcode(__FILE__);
+    $shortcode->storePluginsImageData();
+}
+
+/**
+ * Wird durchgeführt, nachdem das Plugin deaktiviert wurde.
+ */
+function deactivation()
+{
+    delete_transient('rrze-cmsinfo-plugins-image-data');
 }
 
 /**

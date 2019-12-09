@@ -31,6 +31,8 @@ class Shortcode
     public function onLoaded()
     {
         add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
+        add_action('activated_plugin', [$this, 'storePluginsImageData']);
+        add_action('deactivated_plugin', [$this, 'storePluginsImageData']);
         add_shortcode('cmsinfo_themes', [$this, 'themesShortcode'], 10, 2);
         add_shortcode('cmsinfo_plugins', [$this, 'pluginsShortcode'], 10, 2);
     }
@@ -42,6 +44,8 @@ class Shortcode
     {
         wp_register_style('themes-shortcode', plugins_url('css/themes-shortcode.css', plugin_basename($this->pluginFile)));
         wp_register_script('themes-shortcode', plugins_url('js/themes-shortcode.js', plugin_basename($this->pluginFile)));
+
+        wp_register_style('plugins-shortcode', plugins_url('css/plugins-shortcode.css', plugin_basename($this->pluginFile)));
     }
 
     /**
@@ -272,32 +276,25 @@ class Shortcode
     public function pluginsShortcode($atts, $content = '')
     {
         $shortcode_atts = shortcode_atts([
-            'display' => 'false'
+            'images' => 'false'
         ], $atts);
 
-        $display = $shortcode_atts['display'] == 'true' ? true : false;
+        $images = $shortcode_atts['images'] === 'true' ? true : false;
 
         $output = '';
 
-        $active_plugins = get_option('active_plugins');
-        $plugins = get_plugins();
+        $active_plugins = $this->getActivePlugins();
 
-        if (!is_array($active_plugins) || empty($active_plugins) || !is_array($plugins) || empty($plugins)) {
+        if ($active_plugins === false) {
             return '';
         }
 
-        $tmp = [];
-        foreach ($active_plugins as $active_plugin) {
-            $tmp[$active_plugin] = $active_plugin;
+        if ($images) {
+            // Bilddaten holen.
+            $image_data = $this->getPluginsImageData();
         }
 
-        $active_plugins = array_intersect_key($plugins, $tmp);
-
-        if (empty($active_plugins)) {
-            return '';
-        }
-
-        foreach ($active_plugins as $active_plugin) {
+        foreach ($active_plugins as $basename => $active_plugin) {
             $meta_values = [];
             if ($active_plugin['Version'] !== '') {
                 array_push($meta_values, sprintf( /* translators: s=plugin name */
@@ -325,17 +322,33 @@ class Shortcode
                 );
             }
             $output .= sprintf(
-                '<div class="plugin">
-                <h3 class="plugin-title">%s</h3>
+                '<div class="plugin %s">
+                <div class="plugin-title-and-meta">
+                    <h3 class="plugin-title">%s</h3>
+                    %s
+                </div>
                 %s
                 %s
                 </div>',
+                $images === true && empty($image_data[$basename]['icon']) ? 'no-icon' : '',
                 $active_plugin['Name'],
+                $meta_string,
+                $images === true && isset($image_data[$basename]) ? sprintf(
+                    '%s
+                    %s',
+                    $image_data[$basename]['banner'] !== '' && isset($image_data[$basename]['banner']['low']) ? sprintf(
+                        '<figure class="plugin-banner"><img src="%s"></figure>',
+                        $image_data[$basename]['banner']['low']
+                    ) : '',
+                    $image_data[$basename]['icon'] !== '' && $image_data[$basename]['icon']['1x'] !== false ? sprintf(
+                        '<figure class="plugin-icon"><img src="%s"></figure>',
+                        $image_data[$basename]['icon']['1x']
+                    ) : ''
+                ) : '',
                 $active_plugin['Description'] !== '' ? sprintf(
                     '<p class="plugin-description">%s</p>',
                     $active_plugin['Description']
-                ) : '',
-                $meta_string
+                ) : ''
             );
         }
 
@@ -343,9 +356,89 @@ class Shortcode
             return '';
         }
 
+        wp_enqueue_style('plugins-shortcode');
+
         return sprintf(
-            '<div class="plugins-list">%s</div>',
+            '<div class="plugins-list %s">%s</div>',
+            $images === true ? 'with-images' : '',
             $output
         );
+    }
+
+    /**
+     * Gibt ein Array mit den aktiven Plugins zurück.
+     *
+     * @return array
+     */
+    protected function getActivePlugins()
+    {
+        $active_plugins = get_option('active_plugins');
+        $plugins = get_plugins();
+
+        if (!is_array($active_plugins) || empty($active_plugins) || !is_array($plugins) || empty($plugins)) {
+            return false;
+        }
+
+        $tmp = [];
+        foreach ($active_plugins as $active_plugin) {
+            $tmp[$active_plugin] = $active_plugin;
+        }
+
+        $active_plugins = array_intersect_key($plugins, $tmp);
+
+        if (empty($active_plugins) || !is_array($active_plugins)) {
+            return false;
+        }
+
+        return $active_plugins;
+    }
+
+    /**
+     * Holt die Bilddaten (URLs zu Icons und Bannern) zu den aktiven Plugins.
+     *
+     * @return array
+     */
+    protected function getPluginsImageData()
+    {
+        // Prüfen, ob der Transient mit den Bilddaten existiert. Sonst müssen wir die Bilder holen und den Transient neu anlegen.
+        $image_data = get_transient('rrze-cmsinfo-plugins-image-data');
+        if ($image_data === false) {
+            // Die Bilddaten in Transient speichern.
+            $this->storePluginsImageData();
+            $image_data = get_transient('rrze-cmsinfo-plugins-image-data');
+        }
+
+        return $image_data;
+    }
+
+    /**
+     * Speichert die Bilddaten der aktiven Plugins in einem Transient.
+     */
+    public function storePluginsImageData()
+    {
+        $active_plugins = $this->getActivePlugins();
+        $image_data = [];
+        foreach ($active_plugins as $key => $plugin) {
+            $slug = dirname($key);
+            $request = wp_safe_remote_get("https://api.wordpress.org/plugins/info/1.2/?action=plugin_information&request[slug]=$slug&request[fields][icons]=1&request[fields][banners]=1&request[fields][sections]=0");
+
+            if (is_wp_error($request)) {
+                continue;
+            }
+
+            $body = wp_remote_retrieve_body($request);
+            $body = json_decode($body);
+
+            if (isset($body->error)) {
+                continue;
+            }
+
+            $image_data[$key] = [
+                'banner' => isset($body->banners) ? (array) $body->banners : '',
+                'icon' => isset($body->icons) ? (array) $body->icons : '',
+            ];
+        }
+
+        set_transient('rrze-cmsinfo-plugins-image-data', $image_data);
     }
 }

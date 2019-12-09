@@ -21,4 +21,9 @@ Ohne den Screenshot:
 
 ### `cmsinfo_plugins`
 
-Gibt eine Liste der auf einer Site aktiven Plugins aus, ohne Must-Use-Plugins oder Dropins.
+Gibt eine Liste der auf einer Site aktiven Plugins aus, ohne Must-Use-Plugins oder Dropins. Über den `images`-Shortcode kann für jedes Plugin aus dem offiziellen WordPress-Verzeichnis das Banner und Icon angezeigt werden:
+
+```
+[cmsinfo_plugins images="true"]
+```
+

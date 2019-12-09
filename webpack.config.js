@@ -4,7 +4,7 @@ const path = require( 'path' );
 module.exports = {
     ...defaultConfig,
     entry: {
-        'themes-shortcode': [path.resolve(process.cwd(), 'src/js', 'themes-shortcode.js'), path.resolve(process.cwd(), 'src/sass', 'themes-shortcode.scss')],
+        'themes-shortcode': [path.resolve(process.cwd(), 'src/js', 'themes-shortcode.js'), path.resolve(process.cwd(), 'src/sass', 'themes-shortcode.scss'), path.resolve(process.cwd(), 'src/sass', 'plugins-shortcode.scss')],
     },
     output: {
         filename: 'js/[name].js',
