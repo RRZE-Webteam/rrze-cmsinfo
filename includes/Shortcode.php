@@ -222,7 +222,7 @@ class Shortcode
      * @return string
      */
     protected function getExtraLinksList($theme) {
-        if (!is_a($theme, 'WP_Theme')) {
+        if (!$theme instanceof \WP_Theme) {
             return '';
         }
 
