@@ -6,9 +6,11 @@ const
     cleancss = require('gulp-clean-css'),
     postcss = require('gulp-postcss'),
     autoprefixer = require('autoprefixer'),
+    uglify = require('gulp-uglify'),
+    babel = require('gulp-babel'),
     bump = require('gulp-bump'),
     semver = require('semver'),
-    info = require('./package.json'),
+    info = require('./package.json')
 ;
 
 function css() {
@@ -19,6 +21,15 @@ function css() {
         .pipe(postcss([autoprefixer()]))
         .pipe(cleancss())
         .pipe(dest('./css'));
+}
+
+function js() {
+    return src('./src/js/*.js')
+        .pipe(babel({
+            presets: ['@babel/env']
+        }))
+        .pipe(uglify())
+        .pipe(dest('./js'))
 }
 
 function patchPackageVersion() {
@@ -41,8 +52,10 @@ function patchPluginVersion() {
 
 function startWatch() {
     watch('./src/sass/*.scss', css);
+    watch('./gulpsrc/js/*.js', js);
 }
 
 exports.css = css;
+exports.js = js;
 exports.patchversion = series(patchPackageVersion, patchPluginVersion);
 exports.default = startWatch;

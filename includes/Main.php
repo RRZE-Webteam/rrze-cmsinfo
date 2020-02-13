@@ -4,7 +4,8 @@ namespace RRZE\CMSinfo;
 
 defined('ABSPATH') || exit;
 
-use RRZE\CMSinfo\Shortcode;
+use RRZE\CMSinfo\Shortcodes\Plugins;
+use RRZE\CMSinfo\Shortcodes\Themes;
 
 /**
  * Hauptklasse (Main)
@@ -31,18 +32,11 @@ class Main
      */
     public function onLoaded()
     {
-        add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
+        $shortcodeThemes = new Themes($this->pluginFile);
+        $shortcodeThemes->onLoaded();
 
-        // Shortcode-Klasse wird instanziiert.
-        $shortcode = new Shortcode($this->pluginFile);
-        $shortcode->onLoaded();
+        $shortcodePlugins = new Plugins($this->pluginFile);
+        $shortcodePlugins->onLoaded();
     }
 
-    /**
-     * Enqueue der globale Skripte.
-     */
-    public function enqueueScripts()
-    {
-        wp_register_style('cmsinfo', plugins_url('css/plugin.css', plugin_basename($this->pluginFile)));
-    }
 }

@@ -45,7 +45,6 @@ spl_autoload_register(function ($class) {
 });
 
 use RRZE\CMSinfo\Main;
-use RRZE\CMSinfo\Shortcode;
 
 const RRZE_PHP_VERSION = '7.3';
 const RRZE_WP_VERSION = '5.2';
@@ -95,10 +94,6 @@ function activation()
         deactivate_plugins(plugin_basename(__FILE__));
         wp_die($error);
     }
-
-    // Holt die URLs für die Icons und Banner der aktiven Plugins und speichert sie in einem Transient.
-    $shortcode = new Shortcode(__FILE__);
-    $shortcode->storePluginsImageData();
 }
 
 /**
