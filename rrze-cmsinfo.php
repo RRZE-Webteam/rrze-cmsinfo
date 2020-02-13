@@ -46,8 +46,8 @@ spl_autoload_register(function ($class) {
 
 use RRZE\CMSinfo\Main;
 
-const RRZE_PHP_VERSION = '7.3';
-const RRZE_WP_VERSION = '5.2';
+const RRZE_PHP_VERSION = '7.4';
+const RRZE_WP_VERSION = '5.3';
 
 // Registriert die Plugin-Funktion, die bei Aktivierung des Plugins ausgeführt werden soll.
 register_activation_hook(__FILE__, __NAMESPACE__ . '\activation');
