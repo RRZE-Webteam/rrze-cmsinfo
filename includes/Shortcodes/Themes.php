@@ -51,7 +51,7 @@ class Themes
     public function shortcode($atts, $content = '')
     {
         $shortcodeAtts = shortcode_atts([
-            'thumbnail' => 'true',
+            'screenshot' => 'true',
             'theme' => '',
         ], $atts);
 
@@ -133,12 +133,12 @@ class Themes
     }
 
     protected function TemplateParser($theme, $template, $atts) {
-        $thumbnail = $atts['thumbnail'] == 'true' ? true : false;
+        $screenshot = $atts['screenshot'] == 'true' ? true : false;
 
         return sprintf(
             $template,
-            $thumbnail && $theme->get_screenshot() ? sprintf(
-                '<div class="ptheme-screenshot">
+            $screenshot && $theme->get_screenshot() ? sprintf(
+                '<div class="theme-screenshot">
                     <img src="%s">
                 </div>',
                 $theme->get_screenshot()
