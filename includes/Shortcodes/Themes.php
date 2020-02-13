@@ -145,7 +145,7 @@ class Themes
             ) : '',
             $theme->get('Name'),
             sprintf( /* translators: s=theme name */
-                _x('Version: %s', 'theme version', 'cms-info'),
+                _x('Version: %s', 'theme version', 'rrze-cmsinfo'),
                 $theme->get('Version')
             ),
             $theme->get('Description') !== '' && $theme->get('Description') !== false ? sprintf(
@@ -155,7 +155,7 @@ class Themes
             $theme->get('Author') !== '' && $theme->get('Author') !== false ? sprintf(
                 '<p class="theme-author">%s</p>',
                 sprintf( /* translators: s=theme author */
-                    _x('by %s', 'theme author', 'cms-info'),
+                    _x('by %s', 'theme author', 'rrze-cmsinfo'),
                     $theme->get('AuthorURI') !== '' && $theme->get('AuthorURI') !== false ? sprintf(
                         '<a href="%s">%s</a>',
                         $theme->get('AuthorURI'),
@@ -196,7 +196,7 @@ class Themes
             $markupList .= sprintf(
                 '<li><a href="%s">%s</a></li>',
                 esc_url($githubThemeUri),
-                __('Theme on GitHub', 'cms-info')
+                __('Theme on GitHub', 'rrze-cmsinfo')
             );
         }
 
@@ -204,7 +204,7 @@ class Themes
             $markupList .= sprintf(
                 '<li><a href="%s">%s</a></li>',
                 esc_url($themeUri),
-                __('Theme URI', 'cms-info')
+                __('Theme URI', 'rrze-cmsinfo')
             );
         }
 
