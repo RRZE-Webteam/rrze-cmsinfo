@@ -138,19 +138,19 @@ class Plugins
      */
     protected function getActivePlugins()
     {
-        $activePlugins = get_option('active_plugins');
-        $plugins = get_plugins();
+        $activePluginsOption = get_option('active_plugins');
+        $allowedPlugins = get_plugins();
 
-        if (!is_array($activePlugins) || empty($activePlugins) || !is_array($plugins) || empty($plugins)) {
+        if (!is_array($activePluginsOption) || empty($activePluginsOption) || !is_array($allowedPlugins) || empty($allowedPlugins)) {
             return false;
         }
 
-        $tmp = [];
-        foreach ($activePlugins as $activePlugin) {
-            $tmp[$activePlugin] = get_plugin_data(WP_PLUGIN_DIR . '/' . $activePlugin);
+        $activePlugins = [];
+        foreach ($activePluginsOption as $plugin) {
+            if (isset($allowedPlugins[$plugin])) {
+                $activePlugins[$plugin] = get_plugin_data(WP_PLUGIN_DIR . '/' . $plugin);
+            }
         }
-
-        $activePlugins = array_intersect_key($plugins, $tmp);
 
         if (empty($activePlugins) || !is_array($activePlugins)) {
             return false;
@@ -158,5 +158,4 @@ class Plugins
 
         return $activePlugins;
     }
-
 }
