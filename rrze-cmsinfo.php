@@ -1,16 +1,16 @@
 <?php
 
 /*
-Plugin Name:     CMS-Info
+Plugin Name:     CMS Info
 Plugin URI:      https://github.com/RRZE-Webteam/rrze-cmsinfo
-Description:     WordPress-Plugin zur Darstellung von Informationen zu installierten Themes und Plugins auf öffentlichen Seiten.
+Description:     Shortcode that shows information about Themes and Plugins installed on the website.
 Version:         1.0.0
 Author:          RRZE Webteam
 Author URI:      https://blogs.fau.de/webworking/
 License:         GNU General Public License v2
 License URI:     http://www.gnu.org/licenses/gpl-2.0.html
 Domain Path:     /languages
-Text Domain:     cmsinfo
+Text Domain:     cms-info
 */
 
 namespace RRZE\CMSinfo;
@@ -61,7 +61,7 @@ add_action('plugins_loaded', __NAMESPACE__ . '\loaded');
  */
 function loadTextDomain()
 {
-    load_plugin_textdomain('cmsinfo', false, sprintf('%s/languages/', dirname(plugin_basename(__FILE__))));
+    load_plugin_textdomain('cms-info', false, sprintf('%s/languages/', dirname(plugin_basename(__FILE__))));
 }
 
 /**
@@ -72,10 +72,10 @@ function systemRequirements()
     $error = '';
     if (version_compare(PHP_VERSION, RRZE_PHP_VERSION, '<')) {
         /* Übersetzer: 1: aktuelle PHP-Version, 2: erforderliche PHP-Version */
-        $error = sprintf(__('The server is running PHP version %1$s. The Plugin requires at least PHP version %2$s.', 'cmsinfo'), PHP_VERSION, RRZE_PHP_VERSION);
+        $error = sprintf(__('The server is running PHP version %1$s. The Plugin requires at least PHP version %2$s.', 'cms-info'), PHP_VERSION, RRZE_PHP_VERSION);
     } elseif (version_compare($GLOBALS['wp_version'], RRZE_WP_VERSION, '<')) {
         /* Übersetzer: 1: aktuelle WP-Version, 2: erforderliche WP-Version */
-        $error = sprintf(__('The server is running WordPress version %1$s. The Plugin requires at least WordPress version %2$s.', 'cmsinfo'), $GLOBALS['wp_version'], RRZE_WP_VERSION);
+        $error = sprintf(__('The server is running WordPress version %1$s. The Plugin requires at least WordPress version %2$s.', 'cms-info'), $GLOBALS['wp_version'], RRZE_WP_VERSION);
     }
     return $error;
 }
@@ -121,7 +121,7 @@ function loaded()
             $tag = is_plugin_active_for_network(plugin_basename(__FILE__)) ? 'network_admin_notices' : 'admin_notices';
             add_action($tag, function () use ($pluginName, $error) {
                 printf(
-                    '<div class="notice notice-error"><p>' . __('Plugins: %1$s: %2$s', 'cmsinfo') . '</p></div>',
+                    '<div class="notice notice-error"><p>' . __('Plugins: %1$s: %2$s', 'cms-info') . '</p></div>',
                     esc_html($pluginName),
                     esc_html($error)
                 );

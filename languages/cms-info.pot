@@ -1,0 +1,93 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: CMS Info\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-13 11:39+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.3.1; wp-5.3.2"
+
+#. Name of the plugin
+msgid "CMS Info"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://blogs.fau.de/webworking/"
+msgstr ""
+
+#. URI of the plugin
+msgid "https://github.com/RRZE-Webteam/rrze-cmsinfo"
+msgstr ""
+
+#. s=plugin author
+#: includes/Shortcodes/Plugins.php:77
+#, php-format
+msgctxt "plugin author"
+msgid "by %s"
+msgstr ""
+
+#. s=plugin name
+#: includes/Shortcodes/Plugins.php:70
+#, php-format
+msgctxt "plugin version"
+msgid "Version: %s"
+msgstr ""
+
+#: rrze-cmsinfo.php:124
+#, php-format
+msgid "Plugins: %1$s: %2$s"
+msgstr ""
+
+#. Author of the plugin
+msgid "RRZE Webteam"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Shortcode that shows information about Themes and Plugins installed on the "
+"website."
+msgstr ""
+
+#: rrze-cmsinfo.php:75
+#, php-format
+msgid ""
+"The server is running PHP version %1$s. The Plugin requires at least PHP "
+"version %2$s."
+msgstr ""
+
+#: rrze-cmsinfo.php:78
+#, php-format
+msgid ""
+"The server is running WordPress version %1$s. The Plugin requires at least "
+"WordPress version %2$s."
+msgstr ""
+
+#. s=theme author
+#: includes/Shortcodes/Themes.php:158
+#, php-format
+msgctxt "theme author"
+msgid "by %s"
+msgstr ""
+
+#: includes/Shortcodes/Themes.php:199
+msgid "Theme on GitHub"
+msgstr ""
+
+#: includes/Shortcodes/Themes.php:207
+msgid "Theme URI"
+msgstr ""
+
+#. s=theme name
+#: includes/Shortcodes/Themes.php:148
+#, php-format
+msgctxt "theme version"
+msgid "Version: %s"
+msgstr ""

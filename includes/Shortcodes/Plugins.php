@@ -67,14 +67,14 @@ class Plugins
 
             if ($activePlugin['Version'] !== '') {
                 array_push($metaValues, sprintf( /* translators: s=plugin name */
-                    _x('Version: %s', 'plugin version', 'rrze-cmsinfo'),
+                    _x('Version: %s', 'plugin version', 'cms-info'),
                     $activePlugin['Version']
                 ));
             }
 
             if ($activePlugin['Author'] !== '') {
                 array_push($metaValues, sprintf( /* translators: s=plugin author */
-                    _x('by %s', 'plugin author', 'rrze-cmsinfo'),
+                    _x('by %s', 'plugin author', 'cms-info'),
                     $activePlugin['AuthorURI'] !== '' ? sprintf(
                         '<a href="%s">%s</a>',
                         $activePlugin['AuthorURI'],
