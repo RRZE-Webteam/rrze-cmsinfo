@@ -38,7 +38,7 @@ class Plugins
      */
     public function enqueueScripts()
     {
-        wp_register_style('plugins-shortcode', plugins_url('css/plugins-shortcode.css', plugin_basename($this->pluginFile)));
+        wp_register_style('plugins-shortcode', plugins_url('css/plugins-shortcode.css', plugin_basename($this->pluginFile)), [], '20200214');
     }
 
     /**

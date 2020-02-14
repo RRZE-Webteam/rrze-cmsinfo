@@ -39,7 +39,7 @@ class Themes
      */
     public function enqueueScripts()
     {
-        wp_register_style('themes-shortcode', plugins_url('css/themes-shortcode.css', plugin_basename($this->pluginFile)));
+        wp_register_style('themes-shortcode', plugins_url('css/themes-shortcode.css', plugin_basename($this->pluginFile)), [], '20200214');
     }
 
     /**
