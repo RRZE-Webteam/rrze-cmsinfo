@@ -30,7 +30,7 @@ class Themes
             'cms-info-themes',
             plugins_url('dist/themes.css', plugin()->getBasename()),
             [],
-            filemtime(plugin()->getPath('dist') . 'plugins-shortcode.css')
+            filemtime(plugin()->getPath('dist') . 'plugins.css')
         );
     }
 
