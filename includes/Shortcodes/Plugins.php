@@ -29,7 +29,7 @@ class Plugins
             'cms-info-plugins',
             plugins_url('dist/plugins.css', plugin()->getBasename()),
             [],
-            filemtime(plugin()->getPath('dist') . 'plugins-shortcode.css')
+            filemtime(plugin()->getPath('dist') . 'plugins.css')
         );
     }
 
