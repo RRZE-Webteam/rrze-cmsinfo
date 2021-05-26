@@ -4,54 +4,43 @@ namespace RRZE\CMSinfo\Shortcodes;
 
 defined('ABSPATH') || exit;
 
+use function RRZE\CMSinfo\plugin;
+
 /**
  * Plugins Shortcode
  */
 class Plugins
 {
     /**
-     * Der vollständige Pfad- und Dateiname der Plugin-Datei.
-     * @var string
+     * __construct
      */
-    protected $pluginFile;
-
-    /**
-     * [__construct description]
-     * @param string $pluginFile [description]
-     */
-    public function __construct($pluginFile)
-    {
-        $this->pluginFile = $pluginFile;
-    }
-
-    /**
-     * [onLoaded description]
-     */
-    public function onLoaded()
+    public function __construct()
     {
         add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
-        add_shortcode('cmsinfo_plugins', [$this, 'shortcode'], 10, 2);
+        add_shortcode('cmsinfo_plugins', [$this, 'shortcode']);
     }
 
     /**
-     * [enqueueScripts description]
+     * enqueueScripts
      */
     public function enqueueScripts()
     {
-        wp_register_style('plugins-shortcode', plugins_url('css/plugins-shortcode.css', plugin_basename($this->pluginFile)), [], '20200214');
+        wp_register_style(
+            'cms-info-plugins',
+            plugins_url('dist/plugins.css', plugin()->getBasename()),
+            [],
+            filemtime(plugin()->getPath('dist') . 'plugins.css')
+        );
     }
 
     /**
-     * [shortcode description]
-     * @param  array $atts    [description]
-     * @param  string $content [description]
-     * @return string          [description]
+     * shortcode
+     * @param  array $atts
+     * @return string
      */
-    public function shortcode($atts, $content = '')
+    public function shortcode($atts)
     {
-        $shortcode_atts = shortcode_atts([
-
-        ], $atts);
+        $atts = shortcode_atts([], $atts);
 
         $output = '';
 
@@ -112,7 +101,7 @@ class Plugins
             return '';
         }
 
-        wp_enqueue_style('plugins-shortcode');
+        wp_enqueue_style('cms-info-plugins');
 
         $output = '';
         foreach ($markupAry as $markup) {

@@ -12,31 +12,9 @@ use RRZE\CMSinfo\Shortcodes\Themes;
  */
 class Main
 {
-    /**
-     * Der vollständige Pfad- und Dateiname der Plugin-Datei.
-     * @var string
-     */
-    protected $pluginFile;
-
-    /**
-     * Variablen Werte zuweisen.
-     * @param string $pluginFile Pfad- und Dateiname der Plugin-Datei
-     */
-    public function __construct($pluginFile)
+    public function __construct()
     {
-        $this->pluginFile = $pluginFile;
+        new Themes;
+        new Plugins;
     }
-
-    /**
-     * Es wird ausgeführt, sobald die Klasse instanziiert wird.
-     */
-    public function onLoaded()
-    {
-        $shortcodeThemes = new Themes($this->pluginFile);
-        $shortcodeThemes->onLoaded();
-
-        $shortcodePlugins = new Plugins($this->pluginFile);
-        $shortcodePlugins->onLoaded();
-    }
-
 }

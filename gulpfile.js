@@ -1,61 +1,41 @@
-'use strict';
+let gulp = require("gulp");
+let bump = require("gulp-bump");
+let semver = require("semver");
+let touch = require("gulp-touch-cmd");
+let info = require("./package.json");
 
-const
-    {src, dest, watch, series} = require('gulp'),
-    sass = require('gulp-sass'),
-    cleancss = require('gulp-clean-css'),
-    postcss = require('gulp-postcss'),
-    autoprefixer = require('autoprefixer'),
-    uglify = require('gulp-uglify'),
-    babel = require('gulp-babel'),
-    bump = require('gulp-bump'),
-    semver = require('semver'),
-    info = require('./package.json')
-;
+// Major: 1.0.0
+gulp.task("major", async () => {
+    let v = semver.inc(info.version, "major");
+    gulp.src(["./" + info.main, "./package.json"])
+        .pipe(bump({ version: v }))
+        .pipe(gulp.dest("./"))
+        .pipe(touch());
+});
 
-function css() {
-    return src('./src/sass/*.scss', {
-            sourcemaps: true
-        })
-        .pipe(sass())
-        .pipe(postcss([autoprefixer()]))
-        .pipe(cleancss())
-        .pipe(dest('./css'));
-}
+// Minor: 0.1.0
+gulp.task("minor", async () => {
+    let v = semver.inc(info.version, "minor");
+    gulp.src(["./" + info.main, "./package.json"])
+        .pipe(bump({ version: v }))
+        .pipe(gulp.dest("./"))
+        .pipe(touch());
+});
 
-function js() {
-    return src('./src/js/*.js')
-        .pipe(babel({
-            presets: ['@babel/env']
-        }))
-        .pipe(uglify())
-        .pipe(dest('./js'))
-}
+// Patch: 0.0.2
+gulp.task("patch", async () => {
+    let v = semver.inc(info.version, "patch");
+    gulp.src(["./" + info.main, "./package.json"])
+        .pipe(bump({ version: v }))
+        .pipe(gulp.dest("./"))
+        .pipe(touch());
+});
 
-function patchPackageVersion() {
-    var newVer = semver.inc(info.version, 'patch');
-    return src(['./package.json'])
-        .pipe(bump({
-            version: newVer
-        }))
-        .pipe(dest('./'));
-};
-
-function patchPluginVersion() {
-    var newVer = semver.inc(info.version, 'patch');
-    return src('./' + info.main)
-        .pipe(bump({
-            version: newVer
-        }))
-        .pipe(dest('./'));
-};
-
-function startWatch() {
-    watch('./src/sass/*.scss', css);
-    watch('./gulpsrc/js/*.js', js);
-}
-
-exports.css = css;
-exports.js = js;
-exports.patchversion = series(patchPackageVersion, patchPluginVersion);
-exports.default = startWatch;
+// Prerelease: 0.0.1-2
+gulp.task("prerelease", async () => {
+    let v = semver.inc(info.version, "prerelease");
+    gulp.src(["./" + info.main, "./package.json"])
+        .pipe(bump({ version: v }))
+        .pipe(gulp.dest("./"))
+        .pipe(touch());
+});

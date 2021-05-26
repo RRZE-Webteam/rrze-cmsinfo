@@ -1,82 +1,27 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: CMS Info\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-13 13:23+0000\n"
-"PO-Revision-Date: 2020-02-13 13:23+0000\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rrze-cmsinfo\n"
+"POT-Creation-Date: 2021-05-26T15:21:04+00:00\n"
+"PO-Revision-Date: 2021-05-26 17:22+0200\n"
 "Last-Translator: RRZE Webteam <webmaster@fau.de>\n"
 "Language-Team: \n"
-"Language: de_DE_formal\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Loco https://localise.biz/\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 2.4.3\n"
 "X-Loco-Version: 2.3.1; wp-5.3.2\n"
-"X-Loco-Template: languages/rrze-cmsinfo-de_DE.po"
+"X-Loco-Template: languages/rrze-cmsinfo-de_DE.po\n"
 
-#: rrze-cmsinfo.php:75
-#, php-format
-msgid ""
-"The server is running PHP version %1$s. The Plugin requires at least PHP "
-"version %2$s."
-msgstr ""
-"Auf dem Server läuft PHP Version %1$s. Das Plugin benötigt mindestens PHP "
-"Version %2$s."
-
-#: rrze-cmsinfo.php:78
-#, php-format
-msgid ""
-"The server is running WordPress version %1$s. The Plugin requires at least "
-"WordPress version %2$s."
-msgstr ""
-"Auf dem Server läuft WordPress Version %1$s. Das Plugin benötigt mindestens "
-"WordPress Version %2$s."
-
-#: rrze-cmsinfo.php:123
-#, php-format
-msgid "Plugins: %1$s: %2$s"
-msgstr "Plugins: %1$s: %2$s"
-
-#. s=theme name
-#: includes/Shortcodes/Themes.php:148
-#, php-format
-msgctxt "theme version"
-msgid "Version: %s"
-msgstr "Version: %s"
-
-#. s=theme author
-#: includes/Shortcodes/Themes.php:158
-#, php-format
-msgctxt "theme author"
-msgid "by %s"
-msgstr "Von %s"
-
-#: includes/Shortcodes/Themes.php:199
-msgid "Theme on GitHub"
-msgstr "Theme auf GitHub"
-
-#: includes/Shortcodes/Themes.php:207
-msgid "Theme URI"
-msgstr "Theme-URI"
-
-#. s=plugin name
-#: includes/Shortcodes/Plugins.php:70
-#, php-format
-msgctxt "plugin version"
-msgid "Version: %s"
-msgstr "Version: %s"
-
-#. s=plugin author
-#: includes/Shortcodes/Plugins.php:77
-#, php-format
-msgctxt "plugin author"
-msgid "by %s"
-msgstr "Von %s"
-
-#. Name of the plugin
+#. Plugin Name of the plugin
 msgid "RRZE CMSInfo"
 msgstr "RRZE CMSInfo"
+
+#. Plugin URI of the plugin
+msgid "https://github.com/RRZE-Webteam/rrze-cmsinfo"
+msgstr "https://github.com/RRZE-Webteam/rrze-cmsinfo"
 
 #. Description of the plugin
 msgid ""
@@ -85,10 +30,6 @@ msgid ""
 msgstr ""
 "Shortcode, der Informationen zu installierten Themes und Plugins anzeigt."
 
-#. URI of the plugin
-msgid "https://github.com/RRZE-Webteam/rrze-cmsinfo"
-msgstr "https://github.com/RRZE-Webteam/rrze-cmsinfo"
-
 #. Author of the plugin
 msgid "RRZE Webteam"
 msgstr "RRZE Webteam"
@@ -96,3 +37,58 @@ msgstr "RRZE Webteam"
 #. Author URI of the plugin
 msgid "https://blogs.fau.de/webworking/"
 msgstr "https://blogs.fau.de/webworking/"
+
+#. translators: s=plugin name
+#: includes/Shortcodes/Plugins.php:59
+msgctxt "plugin version"
+msgid "Version: %s"
+msgstr "Version: %s"
+
+#. translators: s=plugin author
+#: includes/Shortcodes/Plugins.php:66
+msgctxt "plugin author"
+msgid "by %s"
+msgstr "Von %s"
+
+#. translators: s=theme name
+#: includes/Shortcodes/Themes.php:141
+msgctxt "theme version"
+msgid "Version: %s"
+msgstr "Version: %s"
+
+#. translators: s=theme author
+#: includes/Shortcodes/Themes.php:151
+msgctxt "theme author"
+msgid "by %s"
+msgstr "Von %s"
+
+#: includes/Shortcodes/Themes.php:193
+msgid "Theme on GitHub"
+msgstr "Theme auf GitHub"
+
+#: includes/Shortcodes/Themes.php:201
+msgid "Theme URI"
+msgstr "Theme-URI"
+
+#. translators: 1: Server PHP version number, 2: Required PHP version number.
+#: rrze-cmsinfo.php:70
+msgid ""
+"The server is running PHP version %1$s. The Plugin requires at least PHP "
+"version %2$s."
+msgstr ""
+"Auf dem Server läuft PHP Version %1$s. Das Plugin benötigt mindestens PHP "
+"Version %2$s."
+
+#. translators: 1: Server WordPress version number, 2: Required WordPress version number.
+#: rrze-cmsinfo.php:77
+msgid ""
+"The server is running WordPress version %1$s. The Plugin requires at least "
+"WordPress version %2$s."
+msgstr ""
+"Auf dem Server läuft WordPress Version %1$s. Das Plugin benötigt mindestens "
+"WordPress Version %2$s."
+
+#. translators: 1: The plugin name, 2: The error string.
+#: rrze-cmsinfo.php:95 rrze-cmsinfo.php:143
+msgid "Plugins: %1$s: %2$s"
+msgstr "Plugins: %1$s: %2$s"

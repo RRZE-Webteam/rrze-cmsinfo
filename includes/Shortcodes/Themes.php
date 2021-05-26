@@ -4,6 +4,7 @@ namespace RRZE\CMSinfo\Shortcodes;
 
 defined('ABSPATH') || exit;
 
+use function RRZE\CMSinfo\plugin;
 use WP_Theme;
 
 /**
@@ -12,45 +13,36 @@ use WP_Theme;
 class Themes
 {
     /**
-     * [protected description]
-     * @var string
+     * construct
      */
-    protected $pluginFile;
-
-    /**
-     * [__construct description]
-     */
-    public function __construct($pluginFile)
-    {
-        $this->pluginFile = $pluginFile;
-    }
-
-    /**
-     * [onLoaded description]
-     */
-    public function onLoaded()
+    public function __construct()
     {
         add_action('wp_enqueue_scripts', [$this, 'enqueueScripts']);
-        add_shortcode('cmsinfo_themes', [$this, 'shortcode'], 10, 2);
+        add_shortcode('cmsinfo_themes', [$this, 'shortcode']);
     }
 
     /**
-     * [enqueueScripts description]
+     * enqueueScripts
      */
     public function enqueueScripts()
     {
-        wp_register_style('themes-shortcode', plugins_url('css/themes-shortcode.css', plugin_basename($this->pluginFile)), [], '20200214');
+        wp_register_style(
+            'cms-info-themes',
+            plugins_url('dist/themes.css', plugin()->getBasename()),
+            [],
+            filemtime(plugin()->getPath('dist') . 'plugins.css')
+        );
     }
 
     /**
-     * [shortcode description]
+     * shortcode
      * @param  array $atts    [description]
      * @param  string $content [description]
      * @return string          [description]
      */
-    public function shortcode($atts, $content = '')
+    public function shortcode($atts)
     {
-        $shortcodeAtts = shortcode_atts([
+        $atts = shortcode_atts([
             'screenshot' => 'true',
             'theme' => '',
         ], $atts);
@@ -62,9 +54,9 @@ class Themes
             return '';
         }
 
-        wp_enqueue_style('themes-shortcode');
+        wp_enqueue_style('cms-info-themes');
 
-        $searchTheme = $shortcodeAtts['theme'] ? trim($shortcodeAtts['theme']) : '';
+        $searchTheme = $atts['theme'] ? trim($atts['theme']) : '';
 
         if ($searchTheme !== '') {
             $themeSingle = null;
@@ -80,7 +72,7 @@ class Themes
             }
 
             $template =
-            '<div class="theme-single">
+                '<div class="theme-single">
                 <div class="card">
                     %1$s
                     <div class="content">
@@ -93,13 +85,13 @@ class Themes
                 </div>
             </div>';
 
-            return $this->TemplateParser($themeSingle, $template, $shortcodeAtts);
+            return $this->TemplateParser($themeSingle, $template, $atts);
         }
 
         $markupAry = [];
         foreach ($themes as $theme) {
             $template =
-            '%1$s
+                '%1$s
             <div class="content">
                 <h3>%2$s</h3>
                 <p class="theme-version">%3$s</p>
@@ -107,7 +99,7 @@ class Themes
                 %5$s
                 %6$s
             </div>';
-            $markupAry[] = $this->TemplateParser($theme, $template, $shortcodeAtts);
+            $markupAry[] = $this->TemplateParser($theme, $template, $atts);
         }
 
         if (empty($markupAry)) {
@@ -132,7 +124,8 @@ class Themes
         );
     }
 
-    protected function TemplateParser($theme, $template, $atts) {
+    protected function TemplateParser($theme, $template, $atts)
+    {
         $screenshot = $atts['screenshot'] == 'true' ? true : false;
 
         return sprintf(
@@ -172,7 +165,8 @@ class Themes
      * @param $theme $theme WP_Theme object.
      * @return string Markup list
      */
-    protected function getExtraLinksList($theme) {
+    protected function getExtraLinksList($theme)
+    {
         if (!$theme instanceof WP_Theme) {
             return '';
         }
