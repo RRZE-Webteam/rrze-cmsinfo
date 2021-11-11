@@ -64,11 +64,7 @@ class Plugins
             if ($activePlugin['Author'] !== '') {
                 array_push($metaValues, sprintf( /* translators: s=plugin author */
                     _x('by %s', 'plugin author', 'rrze-cmsinfo'),
-                    $activePlugin['AuthorURI'] !== '' ? sprintf(
-                        '<a href="%s">%s</a>',
-                        $activePlugin['AuthorURI'],
-                        $activePlugin['Author']
-                    ) : $activePlugin['Author']
+                    $activePlugin['Author']
                 ));
             }
 
