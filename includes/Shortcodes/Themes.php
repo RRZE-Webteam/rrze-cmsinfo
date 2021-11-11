@@ -132,7 +132,7 @@ class Themes
             $template,
             $screenshot && $theme->get_screenshot() ? sprintf(
                 '<div class="theme-screenshot">
-                    <img src="%s">
+                    <img src="%s" alt="">
                 </div>',
                 $theme->get_screenshot()
             ) : '',
@@ -183,14 +183,15 @@ class Themes
 
         $markupList = '';
 
+        $themeName = $headers['Name'];
         $themeUri = $headers['ThemeURI'];
-        $githubThemeUri = $headers['GitHubThemeURI'];;
+        $githubThemeUri = $headers['GitHubThemeURI'];
 
         if ($githubThemeUri !== '' && $githubThemeUri !== false) {
             $markupList .= sprintf(
                 '<li><a href="%s">%s</a></li>',
                 esc_url($githubThemeUri),
-                __('Theme on GitHub', 'rrze-cmsinfo')
+                '<span class="sr-only">' . $themeName . '</span> ' . __('Theme on GitHub', 'rrze-cmsinfo')
             );
         }
 
@@ -198,7 +199,7 @@ class Themes
             $markupList .= sprintf(
                 '<li><a href="%s">%s</a></li>',
                 esc_url($themeUri),
-                __('Theme URI', 'rrze-cmsinfo')
+                '<span class="sr-only">' . $themeName . '</span> ' . __('Theme URI', 'rrze-cmsinfo')
             );
         }
 
