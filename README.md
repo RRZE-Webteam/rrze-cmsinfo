@@ -23,3 +23,39 @@ Ohne den Screenshot:
 ### `[cmsinfo_plugins]`
 
 Gibt eine Liste der auf einer Site aktiven Plugins aus, ohne Must-Use-Plugins oder Dropins.
+
+## Hinweis für den Entwickler
+
+**Empfohlene Node-Version:** `node@16`
+
+**Installation der Node-Module**
+
+```shell
+ npm install --legacy-peer-deps
+```
+
+**Update der Node-Module**
+
+```shell
+ npm update --legacy-peer-deps
+```
+
+**Dev-Modus**
+
+```shell
+ npm start
+```
+
+**Build-Modus**
+
+```shell
+ npm run build
+```
+
+**Übersetzung: Erstellen der .pot-Datei (WP-CLI)**
+
+```shell
+ wp i18n make-pot ./ languages/rrze-sso.pot --domain=rrze-sso --exclude=vendor,dist
+```
+
+Hinweis: Die Verwendung von [Poedit](https://poedit.net) für die Übersetzung der jeweiligen Sprachen wird empfohlen.
