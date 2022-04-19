@@ -31,13 +31,13 @@ Gibt eine Liste der auf einer Site aktiven Plugins aus, ohne Must-Use-Plugins od
 **Installation der Node-Module**
 
 ```shell
- npm install --legacy-peer-deps
+ npm install
 ```
 
 **Update der Node-Module**
 
 ```shell
- npm update --legacy-peer-deps
+ npm update
 ```
 
 **Dev-Modus**
