@@ -27,9 +27,9 @@ class Plugins
     {
         wp_register_style(
             'cms-info-plugins',
-            plugins_url('dist/plugins.css', plugin()->getBasename()),
+            plugins_url('build/plugins.css', plugin()->getBasename()),
             [],
-            filemtime(plugin()->getPath('dist') . 'plugins.css')
+            plugin()->getVersion()
         );
     }
 

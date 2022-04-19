@@ -28,9 +28,9 @@ class Themes
     {
         wp_register_style(
             'cms-info-themes',
-            plugins_url('dist/themes.css', plugin()->getBasename()),
+            plugins_url('build/themes.css', plugin()->getBasename()),
             [],
-            filemtime(plugin()->getPath('dist') . 'plugins.css')
+            plugin()->getVersion()
         );
     }
 

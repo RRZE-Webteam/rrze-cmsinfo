@@ -14,25 +14,26 @@ module.exports = (env, argv) => {
     var config = {
         entry: {
             plugins,
-            themes
+            themes,
         },
         output: {
+            path: path.resolve(__dirname, "build"),
             filename: "[name].js",
-            clean: true
+            clean: true,
         },
         optimization: {
             minimizer: [
                 new CSSMinimizerPlugin(),
-                new TerserPlugin({ terserOptions: { sourceMap: true } })
-            ]
+                new TerserPlugin({ terserOptions: { sourceMap: true } }),
+            ],
         },
         plugins: [
             new MiniCSSExtractPlugin({
                 chunkFilename: "[id].css",
-                filename: chunkData => {
+                filename: (chunkData) => {
                     return "[name].css";
-                }
-            })
+                },
+            }),
         ],
         devtool: isDevelopment() ? "cheap-module-source-map" : "source-map",
         module: {
@@ -44,15 +45,10 @@ module.exports = (env, argv) => {
                         {
                             loader: "babel-loader",
                             options: {
-                                plugins: [
-                                    "@babel/plugin-proposal-class-properties"
-                                ],
-                                presets: [
-                                    "@babel/preset-env"
-                                ]
-                            }
-                        }
-                    ]
+                                presets: ["@babel/preset-env"],
+                            },
+                        },
+                    ],
                 },
                 {
                     test: /\.(sa|sc|c)ss$/,
@@ -63,18 +59,15 @@ module.exports = (env, argv) => {
                             loader: "postcss-loader",
                             options: {
                                 postcssOptions: {
-                                    plugins: [autoprefixer()]
-                                }
-                            }
+                                    plugins: [autoprefixer()],
+                                },
+                            },
                         },
-                        "sass-loader"
-                    ]
-                }
-            ]
+                        "sass-loader",
+                    ],
+                },
+            ],
         },
-        externals: {
-            jquery: "jQuery"
-        }
     };
     return config;
 };
