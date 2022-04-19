@@ -1,45 +1,37 @@
 {
-	"name": "rrze-cmsinfo",
-	"version": "1.1.2",
-	"description": "Basic template for all WordPress CMS plugins.",
-	"main": "rrze-cmsinfo.php",
-	"scripts": {
-		"start": "webpack --mode=development --watch",
-		"build": "webpack --mode=production",
-		"major": "gulp major",
-		"minor": "gulp minor",
-		"patch": "gulp patch",
-		"prerelease": "gulp prerelease",
-		"clean": "rm -rf dist/"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://gitlab.rrze.fau.de/rrze-webteam/cmsinfo.git"
-	},
-	"author": "RRZE Webteam",
-	"license": "GPL-2.0-or-later",
-	"devDependencies": {
-		"@babel/core": "^7.16.0",
-		"@babel/plugin-proposal-class-properties": "^7.16.0",
-		"@babel/preset-env": "^7.16.0",
-		"autoprefixer": "^10.4.0",
-		"babel-loader": "^8.2.3",
-		"browserslist": "^4.17.6",
-		"clean-webpack-plugin": "^4.0.0",
-		"css-loader": "^6.5.1",
-		"css-minimizer-webpack-plugin": "^3.1.3",
-		"gulp": "^4.0.2",
-		"gulp-bump": "^3.2.0",
-		"gulp-touch-cmd": "^0.0.1",
-		"lodash": "^4.17.21",
-		"mini-css-extract-plugin": "^2.4.4",
-		"node-sass": "^6.0.1",
-		"postcss-loader": "^6.2.0",
-		"sass-loader": "^12.3.0",
-		"semver": "^7.3.5",
-		"style-loader": "^3.3.1",
-		"terser-webpack-plugin": "^5.2.5",
-		"webpack": "^5.63.0",
-		"webpack-cli": "^4.9.1"
-	}
+    "name": "rrze-cmsinfo",
+    "main": "webpack.config.js",
+    "scripts": {
+        "start": "webpack --mode=development --watch",
+        "build": "webpack --mode=production",
+        "clean": "rm -rf build/",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/RRZE-Webteam/rrze-cmsinfo.git"
+    },
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+        "url": "https://github.com/RRZE-Webteam/rrze-cmsinfo/issues"
+    },
+    "homepage": "https://github.com/RRZE-Webteam/rrze-cmsinfo#readme",
+    "devDependencies": {
+        "@babel/core": "^7.14",
+        "@babel/preset-env": "^7.14",
+        "autoprefixer": "^10.3.1",
+        "babel-loader": "^8.2.2",
+        "clean-webpack-plugin": "^3.0.0",
+        "css-loader": "^6.2.0",
+        "css-minimizer-webpack-plugin": "^3.0.2",
+        "mini-css-extract-plugin": "^2.1.0",
+        "postcss-loader": "^6.1.1",
+        "sass": "^1.49.9",
+        "sass-loader": "^12.1.0",
+        "semver": "^7.3.5",
+        "style-loader": "^3.2.1",
+        "terser-webpack-plugin": "^5.1.4",
+        "webpack": "^5.46.0",
+        "webpack-cli": "^4.7.2"
+    }
 }
