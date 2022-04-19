@@ -4,7 +4,7 @@
 Plugin Name:     RRZE CMSInfo
 Plugin URI:      https://github.com/RRZE-Webteam/rrze-cmsinfo
 Description:     Shortcode that shows information about Themes and Plugins installed on the website.
-Version:         1.1.2
+Version:         1.1.3
 Author:          RRZE Webteam
 Author URI:      https://blogs.fau.de/webworking/
 License:         GNU General Public License v2
@@ -18,9 +18,13 @@ namespace RRZE\CMSinfo;
 defined('ABSPATH') || exit;
 
 const RRZE_PHP_VERSION = '7.4';
-const RRZE_WP_VERSION = '5.7';
+const RRZE_WP_VERSION = '5.9';
 
-// Autoloader (PSR-4)
+/**
+ * SPL Autoloader (PSR-4).
+ * @param string $class The fully-qualified class name.
+ * @return void
+ */
 spl_autoload_register(function ($class) {
     $prefix = __NAMESPACE__;
     $baseDir = __DIR__ . '/includes/';
@@ -38,31 +42,26 @@ spl_autoload_register(function ($class) {
     }
 });
 
+// Register plugin hooks.
 register_activation_hook(__FILE__, __NAMESPACE__ . '\activation');
 register_deactivation_hook(__FILE__, __NAMESPACE__ . '\deactivation');
 
 add_action('plugins_loaded', __NAMESPACE__ . '\loaded');
 
 /**
- * loadTextdomain
+ * Loads a plugin’s translated strings.
  */
 function loadTextdomain()
 {
-    load_plugin_textdomain(
-        'rrze-cmsinfo',
-        false,
-        sprintf('%s/languages/', dirname(plugin_basename(__FILE__)))
-    );
+    load_plugin_textdomain('rrze-cmsinfo', false, dirname(plugin_basename(__FILE__)) . '/languages');
 }
 
 /**
- * systemRequirements
+ * System requirements verification.
  * @return string Return an error message.
  */
 function systemRequirements(): string
 {
-    loadTextdomain();
-
     $error = '';
     if (version_compare(PHP_VERSION, RRZE_PHP_VERSION, '<')) {
         $error = sprintf(
@@ -83,10 +82,11 @@ function systemRequirements(): string
 }
 
 /**
- * activation
+ * Activation callback function.
  */
 function activation()
 {
+    loadTextdomain();
     if ($error = systemRequirements()) {
         deactivate_plugins(plugin_basename(__FILE__));
         wp_die(
@@ -101,35 +101,35 @@ function activation()
 }
 
 /**
- * deactivation
+ * Deactivation callback function.
  */
 function deactivation()
 {
-    //
+    // Nothing to do.
 }
 
 /**
- * plugin
- * @return object
+ * Instantiate Plugin class.
+ * @return object Plugin
  */
-function plugin(): object
+function plugin()
 {
     static $instance;
     if (null === $instance) {
         $instance = new Plugin(__FILE__);
     }
+
     return $instance;
 }
 
 /**
- * loaded
+ * Execute on 'plugins_loaded' API/action.
  * @return void
  */
 function loaded()
 {
-    add_action('init', __NAMESPACE__ . '\loadTextdomain');
-    plugin()->onLoaded();
-
+    loadTextdomain();
+    plugin()->loaded();
     if ($error = systemRequirements()) {
         add_action('admin_init', function () use ($error) {
             if (current_user_can('activate_plugins')) {
@@ -140,7 +140,7 @@ function loaded()
                     printf(
                         '<div class="notice notice-error"><p>' .
                             /* translators: 1: The plugin name, 2: The error string. */
-                            __('Plugins: %1$s: %2$s', 'rrze-cmsinfo') .
+                            __('Plugins: %1$s: %2$s', 'rrze-legal') .
                             '</p></div>',
                         esc_html($pluginName),
                         esc_html($error)
@@ -150,6 +150,5 @@ function loaded()
         });
         return;
     }
-
     new Main;
 }
