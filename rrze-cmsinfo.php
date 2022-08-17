@@ -4,7 +4,7 @@
 Plugin Name:     RRZE CMSInfo
 Plugin URI:      https://github.com/RRZE-Webteam/rrze-cmsinfo
 Description:     Shortcode that shows information about Themes and Plugins installed on the website.
-Version:         1.1.3
+Version:         1.1.4
 Author:          RRZE Webteam
 Author URI:      https://blogs.fau.de/webworking/
 License:         GNU General Public License v2
@@ -18,7 +18,7 @@ namespace RRZE\CMSinfo;
 defined('ABSPATH') || exit;
 
 const RRZE_PHP_VERSION = '7.4';
-const RRZE_WP_VERSION = '5.9';
+const RRZE_WP_VERSION = '6.0';
 
 /**
  * SPL Autoloader (PSR-4).
@@ -105,7 +105,7 @@ function activation()
  */
 function deactivation()
 {
-    // Nothing to do.
+    // Nothing to do here.
 }
 
 /**
@@ -118,7 +118,6 @@ function plugin()
     if (null === $instance) {
         $instance = new Plugin(__FILE__);
     }
-
     return $instance;
 }
 
