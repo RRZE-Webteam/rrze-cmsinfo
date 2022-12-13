@@ -26,7 +26,7 @@ Gibt eine Liste der auf einer Site aktiven Plugins aus, ohne Must-Use-Plugins od
 
 ## Hinweis für den Entwickler
 
-**Empfohlene Node-Version:** `node@16`
+**Empfohlene Node-Version:** `node@19`
 
 **Installation der Node-Module**
 
@@ -55,7 +55,7 @@ Gibt eine Liste der auf einer Site aktiven Plugins aus, ohne Must-Use-Plugins od
 **Übersetzung: Erstellen der .pot-Datei (WP-CLI)**
 
 ```shell
- wp i18n make-pot ./ languages/rrze-sso.pot --domain=rrze-sso --exclude=vendor,dist
+ wp i18n make-pot ./ languages/rrze-sso.pot --domain=rrze-sso --exclude=node_modules,src,build,languages
 ```
 
 Hinweis: Die Verwendung von [Poedit](https://poedit.net) für die Übersetzung der jeweiligen Sprachen wird empfohlen.
