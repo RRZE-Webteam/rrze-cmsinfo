@@ -1,15 +1,8 @@
 {
-    "name": "rrze-cmsinfo",
-    "version": "1.1.5",
-    "main": "rrze-cmsinfo.php",
     "scripts": {
         "start": "webpack --mode=development --watch",
         "build": "webpack --mode=production",
-        "clean": "rm -rf build/",
-        "major": "gulp major",
-        "minor": "gulp minor",
-        "patch": "gulp patch",
-        "prerelease": "gulp prerelease"
+        "clean": "rm -rf build/"
     },
     "repository": {
         "type": "git",
@@ -21,24 +14,20 @@
     },
     "homepage": "https://github.com/RRZE-Webteam/rrze-cmsinfo#readme",
     "devDependencies": {
-        "@babel/core": "7",
-        "@babel/preset-env": "7",
-        "autoprefixer": "10",
-        "babel-loader": "8",
-        "clean-webpack-plugin": "4",
-        "css-loader": "6",
-        "css-minimizer-webpack-plugin": "4",
-        "gulp": "4",
-        "gulp-bump": "3",
-        "gulp-touch-cmd": "0",
-        "mini-css-extract-plugin": "2",
-        "postcss-loader": "7",
-        "sass": "1",
-        "sass-loader": "13",
-        "semver": "7",
-        "style-loader": "3",
-        "terser-webpack-plugin": "5",
-        "webpack": "5",
-        "webpack-cli": "4"
+        "@babel/core": "^7.20.5",
+        "@babel/preset-env": "^7.20.2",
+        "autoprefixer": "^10.4.13",
+        "babel-loader": "^9.1.0",
+        "clean-webpack-plugin": "^4.0.0",
+        "css-loader": "^6.7.2",
+        "css-minimizer-webpack-plugin": "^4.2.2",
+        "mini-css-extract-plugin": "^2.7.2",
+        "postcss-loader": "^7.0.2",
+        "sass": "^1.56.2",
+        "sass-loader": "^13.2.0",
+        "style-loader": "^3.3.1",
+        "terser-webpack-plugin": "^5.3.6",
+        "webpack": "^5.75.0",
+        "webpack-cli": "^5.0.1"
     }
 }
