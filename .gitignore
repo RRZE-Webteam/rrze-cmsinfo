@@ -8,6 +8,7 @@
 .DS_Store
 ### Node ###
 node_modules/
-package-lock.json
 ### WordPress ###
 *.pot
+### Tmp ###
+_tmp/
