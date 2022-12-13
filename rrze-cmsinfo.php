@@ -4,7 +4,7 @@
 Plugin Name:     RRZE CMSInfo
 Plugin URI:      https://github.com/RRZE-Webteam/rrze-cmsinfo
 Description:     Shortcode that shows information about Themes and Plugins installed on the website.
-Version:         1.1.5
+Version:         1.1.6
 Author:          RRZE Webteam
 Author URI:      https://blogs.fau.de/webworking/
 License:         GNU General Public License v2
@@ -17,8 +17,8 @@ namespace RRZE\CMSinfo;
 
 defined('ABSPATH') || exit;
 
-const RRZE_PHP_VERSION = '7.4';
-const RRZE_WP_VERSION = '6.0';
+const RRZE_PHP_VERSION = '8.0';
+const RRZE_WP_VERSION  = '6.1';
 
 /**
  * SPL Autoloader (PSR-4).
@@ -27,7 +27,7 @@ const RRZE_WP_VERSION = '6.0';
  */
 spl_autoload_register(function ($class) {
     $prefix = __NAMESPACE__;
-    $baseDir = __DIR__ . '/includes/';
+    $base_dir = __DIR__ . '/includes/';
 
     $len = strlen($prefix);
     if (strncmp($prefix, $class, $len) !== 0) {
@@ -35,7 +35,7 @@ spl_autoload_register(function ($class) {
     }
 
     $relativeClass = substr($class, $len);
-    $file = $baseDir . str_replace('\\', '/', $relativeClass) . '.php';
+    $file = $base_dir . str_replace('\\', '/', $relativeClass) . '.php';
 
     if (file_exists($file)) {
         require $file;
@@ -49,11 +49,15 @@ register_deactivation_hook(__FILE__, __NAMESPACE__ . '\deactivation');
 add_action('plugins_loaded', __NAMESPACE__ . '\loaded');
 
 /**
- * Loads a plugin’s translated strings.
+ * loadTextdomain
  */
 function loadTextdomain()
 {
-    load_plugin_textdomain('rrze-cmsinfo', false, dirname(plugin_basename(__FILE__)) . '/languages');
+    load_plugin_textdomain(
+        'rrze-cmsinfo',
+        false,
+        sprintf('%s/languages/', dirname(plugin_basename(__FILE__)))
+    );
 }
 
 /**
@@ -62,19 +66,23 @@ function loadTextdomain()
  */
 function systemRequirements(): string
 {
+    global $wp_version;
+    // Strip off any -alpha, -RC, -beta, -src suffixes.
+    list($wpVersion) = explode('-', $wp_version);
+    $phpVersion = phpversion();
     $error = '';
-    if (version_compare(PHP_VERSION, RRZE_PHP_VERSION, '<')) {
+    if (!is_php_version_compatible(RRZE_PHP_VERSION)) {
         $error = sprintf(
             /* translators: 1: Server PHP version number, 2: Required PHP version number. */
             __('The server is running PHP version %1$s. The Plugin requires at least PHP version %2$s.', 'rrze-cmsinfo'),
-            PHP_VERSION,
+            $phpVersion,
             RRZE_PHP_VERSION
         );
-    } elseif (version_compare($GLOBALS['wp_version'], RRZE_WP_VERSION, '<')) {
+    } elseif (!is_wp_version_compatible(RRZE_WP_VERSION)) {
         $error = sprintf(
             /* translators: 1: Server WordPress version number, 2: Required WordPress version number. */
             __('The server is running WordPress version %1$s. The Plugin requires at least WordPress version %2$s.', 'rrze-cmsinfo'),
-            $GLOBALS['wp_version'],
+            $wpVersion,
             RRZE_WP_VERSION
         );
     }
@@ -105,7 +113,7 @@ function activation()
  */
 function deactivation()
 {
-    // Nothing to do here.
+    //
 }
 
 /**
@@ -139,7 +147,7 @@ function loaded()
                     printf(
                         '<div class="notice notice-error"><p>' .
                             /* translators: 1: The plugin name, 2: The error string. */
-                            __('Plugins: %1$s: %2$s', 'rrze-legal') .
+                            __('Plugins: %1$s: %2$s', 'rrze-cmsinfo') .
                             '</p></div>',
                         esc_html($pluginName),
                         esc_html($error)

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: CMS Info\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/rrze-cmsinfo\n"
-"POT-Creation-Date: 2022-08-17T10:13:27+00:00\n"
-"PO-Revision-Date: 2022-08-17 12:14+0200\n"
+"POT-Creation-Date: 2022-12-13T14:03:08+00:00\n"
+"PO-Revision-Date: 2022-12-13 15:03+0100\n"
 "Last-Translator: RRZE Webteam <webmaster@fau.de>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Loco-Version: 2.3.1; wp-5.3.2\n"
 "X-Loco-Template: languages/rrze-cmsinfo-de_DE.po\n"
 
@@ -71,7 +71,7 @@ msgid "Theme URI"
 msgstr "Theme-URI"
 
 #. translators: 1: Server PHP version number, 2: Required PHP version number.
-#: rrze-cmsinfo.php:69
+#: rrze-cmsinfo.php:77
 msgid ""
 "The server is running PHP version %1$s. The Plugin requires at least PHP "
 "version %2$s."
@@ -80,7 +80,7 @@ msgstr ""
 "Version %2$s."
 
 #. translators: 1: Server WordPress version number, 2: Required WordPress version number.
-#: rrze-cmsinfo.php:76
+#: rrze-cmsinfo.php:84
 msgid ""
 "The server is running WordPress version %1$s. The Plugin requires at least "
 "WordPress version %2$s."
@@ -89,6 +89,6 @@ msgstr ""
 "WordPress Version %2$s."
 
 #. translators: 1: The plugin name, 2: The error string.
-#: rrze-cmsinfo.php:95
+#: rrze-cmsinfo.php:103 rrze-cmsinfo.php:150
 msgid "Plugins: %1$s: %2$s"
 msgstr "Plugins: %1$s: %2$s"
