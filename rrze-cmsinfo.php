@@ -1,16 +1,18 @@
 <?php
 
 /*
-Plugin Name:     RRZE CMSInfo
-Plugin URI:      https://github.com/RRZE-Webteam/rrze-cmsinfo
-Description:     Shortcode that shows information about Themes and Plugins installed on the website.
-Version:         1.1.6
-Author:          RRZE Webteam
-Author URI:      https://blogs.fau.de/webworking/
-License:         GNU General Public License v2
-License URI:     http://www.gnu.org/licenses/gpl-2.0.html
-Domain Path:     /languages
-Text Domain:     rrze-cmsinfo
+Plugin Name:       RRZE CMSInfo
+Plugin URI:        https://github.com/RRZE-Webteam/rrze-cmsinfo
+Description:       Shortcode that shows information about Themes and Plugins installed on the website.
+Version:           1.1.7
+Requires at least: 6.1
+Requires PHP:      8.0
+Author:            RRZE Webteam
+Author URI:        https://blogs.fau.de/webworking/
+License:           GNU General Public License v2
+License URI:       http://www.gnu.org/licenses/gpl-2.0.html
+Domain Path:       /languages
+Text Domain:       rrze-cmsinfo
 */
 
 namespace RRZE\CMSinfo;
