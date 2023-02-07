@@ -4,26 +4,17 @@
         "build": "webpack --mode=production",
         "clean": "rm -rf build/"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/RRZE-Webteam/rrze-cmsinfo.git"
-    },
-    "license": "GPL-3.0-or-later",
-    "bugs": {
-        "url": "https://github.com/RRZE-Webteam/rrze-cmsinfo/issues"
-    },
-    "homepage": "https://github.com/RRZE-Webteam/rrze-cmsinfo#readme",
     "devDependencies": {
-        "@babel/core": "^7.20.5",
+        "@babel/core": "^7.20.12",
         "@babel/preset-env": "^7.20.2",
         "autoprefixer": "^10.4.13",
-        "babel-loader": "^9.1.0",
+        "babel-loader": "^9.1.2",
         "clean-webpack-plugin": "^4.0.0",
-        "css-loader": "^6.7.2",
+        "css-loader": "^6.7.3",
         "css-minimizer-webpack-plugin": "^4.2.2",
         "mini-css-extract-plugin": "^2.7.2",
         "postcss-loader": "^7.0.2",
-        "sass": "^1.56.2",
+        "sass": "^1.58.0",
         "sass-loader": "^13.2.0",
         "style-loader": "^3.3.1",
         "terser-webpack-plugin": "^5.3.6",
