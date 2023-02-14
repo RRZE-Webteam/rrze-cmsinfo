@@ -124,7 +124,16 @@ class Plugins
     protected function getActivePlugins()
     {
         $activePluginsOption = get_option('active_plugins');
-        $allowedPlugins = get_plugins();
+        if (is_plugin_active_for_network('rrze-netzwerk-audit/rrze-netzwerk-audit.php')) {
+            $siteOption = (object) get_site_option('rrze_netzwerk_audit');
+            $enabledPlugins = $siteOption->enabled_plugins ?? [];
+            $allowedPlugins = [];
+            foreach ($enabledPlugins as $plugin) {
+                $allowedPlugins[$plugin] = $plugin;
+            }
+        } else {
+            $allowedPlugins = get_plugins();
+        }
 
         if (!is_array($activePluginsOption) || empty($activePluginsOption) || !is_array($allowedPlugins) || empty($allowedPlugins)) {
             return false;
