@@ -1,2 +1,1 @@
 .plugins-list{grid-gap:1rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));margin:0 auto;max-width:1200px}.plugins-list .card{border:1px solid #ccc;box-shadow:2px 2px 6px 0 rgba(0,0,0,.3);min-height:4rem}.plugins-list .card .content{word-wrap:break-word;padding:1rem}
-/*# sourceMappingURL=plugins.css.map*/
