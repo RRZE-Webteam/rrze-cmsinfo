@@ -179,6 +179,7 @@ class Themes
             'AuthorURI'   => 'Author URI',
             'Version'     => 'Version',
             'GitHubThemeURI' => 'GitHub Theme URI',
+            'GitLabThemeURI' => 'GitLab Theme URI',
         ]);
 
         $markupList = '';
@@ -186,12 +187,24 @@ class Themes
         $themeName = $headers['Name'];
         $themeUri = $headers['ThemeURI'];
         $githubThemeUri = $headers['GitHubThemeURI'];
+        $gitlabThemeUri = $headers['GitLabThemeURI'];
 
         if ($githubThemeUri !== '' && $githubThemeUri !== false) {
+            if (!str_contains($githubThemeUri, 'github.com') && !str_contains($githubThemeUri, 'gitlab')) {
+                $githubThemeUri = 'https://github.com/' . $githubThemeUri; // owner/repository is also a valid value
+            }
             $markupList .= sprintf(
                 '<li><a href="%s">%s</a></li>',
                 esc_url($githubThemeUri),
                 '<span class="sr-only">' . $themeName . '</span> ' . __('Theme on GitHub', 'rrze-cmsinfo')
+            );
+        }
+
+        if ($gitlabThemeUri !== '' && $gitlabThemeUri !== false && str_contains($gitlabThemeUri, 'gitlab')) {
+            $markupList .= sprintf(
+                '<li><a href="%s">%s</a></li>',
+                esc_url($gitlabThemeUri),
+                '<span class="sr-only">' . $themeName . '</span> ' . __('Theme on GitLab', 'rrze-cmsinfo')
             );
         }
 
