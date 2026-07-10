@@ -1,4 +1,23 @@
 {
+    "version": "1.2.3",
+    "compatibility": {
+        "wprequires": "6.7",
+        "wptestedup": "7.0.1",
+        "phprequires": "8.3"
+  },
+  "author": {
+    "name": "RRZE-Webteam <webmaster@fau.de> (https://www.rrze.fau.de)",
+    "url": "https://www.wordpress.rrze.fau.de"
+  },
+  "license": "GNU General Public License v3 or later",
+  "licenseurl": "http://www.gnu.org/licenses/gpl-3.0.html",
+  "tags": "Plugin, WordPress, CMS, FAU, RRZE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RRZE-Webteam/rrze-cmsinfo",
+    "issues": "https://github.com/RRZE-Webteam/rrze-cmsinfo/issues",
+    "clone": "git+https://github.com/RRZE-Webteam/rrze-cmsinfo.git"
+  },
     "scripts": {
         "start": "webpack --mode=development --watch",
         "build": "webpack --mode=production",

@@ -1,3 +1,9 @@
+[![Aktuelle Version](https://img.shields.io/github/package-json/v/rrze-webteam/rrze-cmsinfo/master?label=Version)](https://github.com/RRZE-Webteam/rrze-cmsinfo)
+[![Release Version](https://img.shields.io/github/v/release/rrze-webteam/rrze-cmsinfo?label=Release+Version)](https://github.com/rrze-webteam/rrze-cmsinfo/releases/)
+[![GitHub License](https://img.shields.io/github/license/rrze-webteam/rrze-cmsinfo)](https://github.com/RRZE-Webteam/rrze-cmsinfo)
+[![GitHub issues](https://img.shields.io/github/issues/RRZE-Webteamrrze-cmsinfo)](https://github.com/RRZE-Webteam/rrze-cmsinfo/issues)
+
+
 # RRZE CMSInfo
 
 WordPress-Plugin zur Darstellung von Informationen zu installierten Themes und Plugins auf öffentlichen Seiten.
